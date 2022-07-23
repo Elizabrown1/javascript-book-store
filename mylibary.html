@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="mylibary.css">
+  <!-- <link rel="stylesheet" type="text/js" href="mylibary.js"> -->
+</head>
+<body>
+	<div class="background">
+		<div class="title">
+			<p>WELCOME TO MY LIBRARY</p>
+	</div><br><br>
+	<div class="box1"><br>
+		<input type="" name="" id="author" placeholder="name of author"><br><br>
+		<input type="" name="" id="book" placeholder="name of book"><br><br>
+		<input type="" name="" id="pages" placeholder="numbers of pages"><br><br>
+		<button class="add" onclick="myclick()">ADD TO LIBRARY</button><br><br>
+		<button class="check" onclick="retreive()">CHECK BOOK ADDED</button><br><br><br>
+
+
+<div class="box2"><br>
+	<p class="here">HERE ARE YOUR BOOKS</p><br>
+	<div class="border">
+	<table style="width:100%" >
+  <tr>
+    <th>S/N</th>
+    <th>NAME OF AUTHOR</th> 
+    <th>NAME OF BOOK</th>
+    <th>NUM OF PAGES</th>
+    <th>ACTION</th>
+
+  </tr>
+  <tbody id="hid">
+    
+    
+  </tbody>
+  
+</table>
+<br>
+<!-- <button id="Delete">Delete All</button> -->
+</div>
+
+
+</div>		
+
+
+</div>
+  <script>
+    // var obj = {
+    //   network: "MTN",
+    //   amount: 200,
+    //   number: 46547586868,
+    //   used: "used"
+    // }
+var myarr;
+function myclick() {
+  // let a=author.value
+  // let b=book.value
+  // let c=pages.value
+
+ var obj={
+      authorname:author.value,
+      bookname:book.value,
+      bookpages:pages.value
+}
+// console.log(obj)
+if (!localStorage.hasOwnProperty("mylibary")) {
+  localStorage.setItem("mylibary",JSON.stringify([]))
+}
+  myarr = JSON.parse(localStorage.getItem("mylibary"))
+myarr.push(obj)
+localStorage.mylibary = JSON.stringify(myarr)
+}
+console.log(myarr)
+
+
+
+  //    if(obj.authorname == "" || obj.bookname == "" || obj.bookpages == ""){
+  //      alert("please fill in the input")
+
+  //    }
+  //    else{
+  //     var myarr = JSON.parse(localStorage.getItem("mylibary"))
+  //      var list = myarr.filter(bc=> bc.authorname == a && bc.bookname  == b &&  bc.bookpages == c);
+  //      if(obj.authorname != "" && obj.bookname != "" && obj.bookpages != "" && list.length >0){
+  //       alert("already existed")
+  //     }
+  //     else{
+  //       alert("your book has been added")
+  //     }
+  //   }
+  // }
+    
+  
+
+ 
+   
+        
+    var collect
+     function retreive(){
+      
+      var res="";
+     collect = JSON.parse(localStorage.getItem("mylibary"))
+    for (var i = 0; i < collect.length; i++) {
+      var button= "<td>" + "<button onclick='del("+i+")'>Delete</button>" + "</td>"
+      var column="<td>" +[i+1]+ "</td>" + "<td>" + collect[i].authorname + "</td>" + 
+     "<td>" + collect[i].bookname + "</td>" + "<td>" + collect[i].bookpages + "</td>"+"<td>"+button+"</td>"
+     
+     var row="<tr>" +column+ "</tr>";
+     // res = res+ row
+    res+= row;
+    
+    hid.innerHTML=res;
+
+  }
+    
+}
+
+function del(ma) {
+  let co = collect.filter((val,i)=>i!=ma)
+ localStorage.mylibary=JSON.stringify(co) 
+ retreive()
+
+}
+  
+  
+ 
+  </script>
+
+</body>
+</html>
